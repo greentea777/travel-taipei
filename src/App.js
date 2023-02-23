@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
-import db from "./database/db.json";
+import ItemList from "./components/ItemList";
 
 function App() {
-  const [data, setData] = useState([db.data]);
-
-  console.log(data);
-
   return (
     <div className="App">
-      <h1></h1>
+      <ItemList />
     </div>
   );
 }
