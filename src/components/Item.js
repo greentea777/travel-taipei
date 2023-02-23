@@ -1,6 +1,10 @@
 import React from "react";
 
 const Item = ({ item }) => {
+  console.log(item.images.length);
+
+  const randomIndex = Math.floor(Math.random() * item.images.length);
+
   return (
     <div className="item">
       <h3>{item.name}</h3>
@@ -8,7 +12,7 @@ const Item = ({ item }) => {
         src={
           item.images.length < 1
             ? "https://www.bcpva.com/wp-content/themes/consultix/images/no-image-found-360x260.png"
-            : item.images[0].src
+            : item.images[randomIndex].src
         }
         alt={item.name}
       />
