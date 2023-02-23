@@ -1,8 +1,6 @@
 import React from "react";
 
 const Item = ({ item }) => {
-  console.log(item.images.length);
-
   const randomIndex = Math.floor(Math.random() * item.images.length);
 
   return (
