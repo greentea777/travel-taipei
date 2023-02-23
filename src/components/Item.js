@@ -1,8 +1,6 @@
 import React from "react";
 
 const Item = ({ item }) => {
-  console.log(item.friendly.length);
-
   return (
     <div className="item">
       <h3>{item.name}</h3>
