@@ -35,6 +35,7 @@ const ItemList = ({ travelData }) => {
         pageLinkClassName="page-num"
         previousLinkClassName="page-num"
         nextLinkClassName="page-num"
+        breakLinkClassName="page-num"
         activeLinkClassName="active"
       />
     </>

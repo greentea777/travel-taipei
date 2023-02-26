@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ItemList from "./components/ItemList";
 import SearchItem from "./components/SearchItem";
 import db from "./database/db.json";
 import Header from "./components/Header";
+import LogPage from "./components/LogPage";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -33,6 +34,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <LogPage />
       <SearchItem
         search={search}
         setSearch={setSearch}
