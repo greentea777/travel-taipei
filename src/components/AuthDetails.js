@@ -17,7 +17,6 @@ const AuthDetails = () => {
     };
 
     checkUser();
-    console.log(authUser?.displayName);
 
     return () => {
       checkUser();
