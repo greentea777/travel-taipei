@@ -215,10 +215,10 @@ nav a:any-link {
 .logInPage {
   position: absolute;
   width: 35%;
-  height: 80%;
+  height: 40%;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -25%);
+  transform: translate(-50%, -50%);
   z-index: 10;
 }
 
@@ -254,7 +254,7 @@ nav a:any-link {
 .SignInPage,
 .SignUpPage {
   position: absolute;
-  width: 300px;
+  width: 100%;
   height: 300px;
   background-color: green;
   display: none;

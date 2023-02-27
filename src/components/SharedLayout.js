@@ -11,7 +11,9 @@ const SharedLayout = () => {
   return (
     <>
       <Header handleLogInBox={handleLogInBox} />
-      {isLogInBox && <LogPage />}
+      {isLogInBox && (
+        <LogPage isLogInBox={isLogInBox} setIsLogInBox={setIsLogInBox} />
+      )}
       <main>
         <Outlet />
       </main>
