@@ -4,6 +4,8 @@ import SearchItem from "./components/SearchItem";
 import db from "./database/db.json";
 import Header from "./components/Header";
 import LogPage from "./components/LogPage";
+import { Route, Routes } from "react-router-dom";
+import SingleItem from "./components/SingleItem";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -32,16 +34,15 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <LogPage />
-      <SearchItem
-        search={search}
-        setSearch={setSearch}
-        handleSearch={handleSearch}
-      />
-      <ItemList travelData={searchResults} />
-    </div>
+    <Routes>
+      <Route path="/">
+        <Route index element={<ItemList travelData={travelData} />} />
+        <Route
+          path="attraction/:itemid"
+          element={<SingleItem travelData={travelData} />}
+        />
+      </Route>
+    </Routes>
   );
 }
 
