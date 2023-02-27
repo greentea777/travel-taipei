@@ -1,11 +1,10 @@
 import { useState } from "react";
 import ItemList from "./components/ItemList";
-import SearchItem from "./components/SearchItem";
 import db from "./database/db.json";
-import Header from "./components/Header";
-import LogPage from "./components/LogPage";
 import { Route, Routes } from "react-router-dom";
 import SingleItem from "./components/SingleItem";
+import SharedLayout from "./components/SharedLayout";
+import LogPage from "./components/LogPage";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -35,12 +34,13 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/">
+      <Route path="/" element={<SharedLayout />}>
         <Route index element={<ItemList travelData={travelData} />} />
         <Route
           path="attraction/:itemid"
           element={<SingleItem travelData={travelData} />}
         />
+        <Route path="login" element={<LogPage />} />
       </Route>
     </Routes>
   );

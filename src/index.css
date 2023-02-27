@@ -6,6 +6,13 @@
   box-sizing: border-box;
 }
 
+/* || UTILITY CLASSES */
+
+.offscreen {
+  position: absolute;
+  left: -10000px;
+}
+
 /* TRAVELITEM */
 
 .travelItem-container {
@@ -166,3 +173,7 @@ nav a:any-link {
 }
 
 /* LOGIN PAGE */
+
+.logInPage {
+  width: 300px;
+}
