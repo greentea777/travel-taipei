@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Header = () => {
+const Header = ({ handleLogInBox }) => {
   const [isButtonOn, setIsbuttonOn] = useState(false);
 
   const hadleMenu = () => {
@@ -11,6 +11,9 @@ const Header = () => {
     <header className="header">
       <div className="header-title">
         <span className="logo">Logo</span>
+        <span className="signInButton" onClick={() => handleLogInBox()}>
+          Sign In
+        </span>
 
         <button
           onClick={hadleMenu}
@@ -24,9 +27,6 @@ const Header = () => {
         <ul>
           <li>
             <a href="">Favourite</a>
-          </li>
-          <li>
-            <a href="">Sign in</a>
           </li>
         </ul>
       </nav>

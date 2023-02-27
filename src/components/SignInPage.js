@@ -2,7 +2,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../config/firebase";
 
-const SignInPage = () => {
+const SignInPage = ({ isSignIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,10 +20,12 @@ const SignInPage = () => {
   };
 
   return (
-    <div className="SignInPage">
+    <div className={`SignInPage ${isSignIn ? "show" : ""}`}>
       <form onSubmit={signIn}>
-        <h1>Sign in</h1>
-        <label htmlFor="email">Email: </label>
+        <h1 className="offscreen">Sign in</h1>
+        <label className="offscreen" htmlFor="email">
+          Email:{" "}
+        </label>
         <input
           type="email"
           id="email"
@@ -31,7 +33,9 @@ const SignInPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="password">Password: </label>
+        <label className="offscreen" htmlFor="password">
+          Password:{" "}
+        </label>
         <input
           type="password"
           id="password"

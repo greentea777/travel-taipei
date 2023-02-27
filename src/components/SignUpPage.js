@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
 import { auth } from "../config/firebase";
 
-const SignUpPage = () => {
+const SignUpPage = ({ isSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
@@ -24,10 +24,12 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="SignUpPage">
+    <div className={`SignUpPage ${isSignUp ? "show" : ""}`}>
       <form onSubmit={signUp}>
-        <h1>Sign up</h1>
-        <label htmlFor="userName">User Name: </label>
+        <h1 className="offscreen">Sign up</h1>
+        <label className="offscreen" htmlFor="userName">
+          User Name:
+        </label>
         <input
           type="text"
           id="userName"
@@ -35,7 +37,9 @@ const SignUpPage = () => {
           value={userName}
           onChange={(e) => setUserName(e.target.value)}
         />
-        <label htmlFor="signUpEmail">Email: </label>
+        <label className="offscreen" htmlFor="signUpEmail">
+          Email:
+        </label>
         <input
           type="email"
           id="signUpEmail"
@@ -43,7 +47,9 @@ const SignUpPage = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <label htmlFor="signUpPassword">Password: </label>
+        <label className="offscreen" htmlFor="signUpPassword">
+          Password:
+        </label>
         <input
           type="password"
           id="signUpPassword"

@@ -15,6 +15,13 @@
 
 /* TRAVELITEM */
 
+main {
+  height: 100svh;
+  width: 100%;
+  position: absolute;
+  top: 50px;
+}
+
 .travelItem-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, 300px);
@@ -73,11 +80,24 @@
 
 /* HEADER */
 
+header {
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  z-index: 50;
+}
+
 .header-title {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: blue;
+  position: relative;
+  z-index: 20;
+}
+
+.signInButton {
+  cursor: pointer;
 }
 
 .nav-button {
@@ -90,6 +110,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 20;
 }
 
 .nav-icon,
@@ -131,28 +152,37 @@
 
 @keyframes expendedMenu {
   0% {
-    transform: scaleY(0);
-  }
-
-  80% {
-    transform: scaleY(1.2);
+    transform: translateY(-100px);
   }
 
   100% {
-    transform: scaleY(1);
+    transform: translateY(0%);
+  }
+}
+
+@keyframes unexpendedMenu {
+  0% {
+    transform: translateY(0%);
+  }
+
+  100% {
+    transform: translateY(-100px);
   }
 }
 
 nav {
   background-color: blue;
-  display: none;
-  animation: expendedMenu 0.5s forwards;
+  transform: translateY(-100%);
   transform-origin: top center;
+  transition: 0.5s;
+
+  animation: unexpendedMenu 0.5s forwards;
 }
 
 nav.expended {
   display: block;
-  transition: 0.3s;
+  animation: expendedMenu 0.5s forwards;
+  transition: 0.5s;
 }
 
 nav ul {
@@ -174,6 +204,67 @@ nav a:any-link {
 
 /* LOGIN PAGE */
 
+.logIn-container {
+  width: 100%;
+  height: 100%;
+
+  position: fixed;
+  z-index: 1;
+}
+
 .logInPage {
+  position: absolute;
+  width: 35%;
+  height: 80%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -25%);
+  z-index: 10;
+}
+
+.logCover {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.5;
+}
+
+.swichInButton,
+.swichUpButton {
+  position: absolute;
+}
+
+.swichUpButton {
+  left: 45px;
+}
+
+.logInPage form {
+  display: flex;
+  flex-direction: column;
+}
+
+.logInPage form input {
+  margin: 10px 0;
+}
+
+.logInPage button.show {
+  background-color: red;
+}
+
+.SignInPage,
+.SignUpPage {
+  position: absolute;
   width: 300px;
+  height: 300px;
+  background-color: green;
+  display: none;
+  top: 20px;
+}
+
+.SignInPage.show {
+  display: block;
+}
+
+.SignUpPage.show {
+  display: block;
 }
