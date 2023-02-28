@@ -1,11 +1,13 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 
-const SignUpPage = ({ isSignUp }) => {
+const SignUpPage = ({ isSignUp, setIsLogInBox }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const navigate = useNavigate();
 
   const signUp = async (e) => {
     e.preventDefault();
@@ -17,6 +19,8 @@ const SignUpPage = ({ isSignUp }) => {
       );
 
       await updateProfile(auth.currentUser, { displayName: userName });
+      setIsLogInBox(false);
+      navigate("/");
       console.log(userCredential);
     } catch (err) {
       console.log(err);

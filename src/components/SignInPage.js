@@ -1,10 +1,12 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 
-const SignInPage = ({ isSignIn }) => {
+const SignInPage = ({ isSignIn, setIsLogInBox }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const signIn = async (e) => {
     e.preventDefault();
@@ -14,6 +16,8 @@ const SignInPage = ({ isSignIn }) => {
         email,
         password
       );
+      setIsLogInBox(false);
+      navigate("/");
     } catch (err) {
       console.log("You have not signed up yet!");
     }

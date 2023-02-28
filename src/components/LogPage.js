@@ -45,8 +45,8 @@ const LogPage = ({ isLogInBox, setIsLogInBox }) => {
           Sign Up
         </button>
 
-        <SignUpPage isSignUp={isSignUp} />
-        <SignInPage isSignIn={isSignIn} />
+        <SignUpPage isSignUp={isSignUp} setIsLogInBox={setIsLogInBox} />
+        <SignInPage isSignIn={isSignIn} setIsLogInBox={setIsLogInBox} />
       </div>
       <div className="logCover"></div>
     </div>

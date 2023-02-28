@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ItemList from "./components/ItemList";
 import db from "./database/db.json";
 import { Route, Routes } from "react-router-dom";
 import SingleItem from "./components/SingleItem";
 import SharedLayout from "./components/SharedLayout";
 import LogPage from "./components/LogPage";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "./config/firebase";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -32,9 +34,29 @@ function App() {
     setSearch("");
   };
 
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      await onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setAuthUser(user);
+        } else {
+          setAuthUser(null);
+        }
+      });
+    };
+
+    checkUser();
+
+    return () => {
+      checkUser();
+    };
+  }, []);
+
   return (
     <Routes>
-      <Route path="/" element={<SharedLayout />}>
+      <Route path="/" element={<SharedLayout authUser={authUser} />}>
         <Route index element={<ItemList travelData={travelData} />} />
         <Route
           path="attraction/:itemid"
