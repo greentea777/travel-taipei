@@ -32,18 +32,18 @@ const LogPage = ({ isLogInBox, setIsLogInBox }) => {
   return (
     <div className="logIn-container">
       <div className="logInPage" ref={ref}>
-        <button
+        <span
           className={`swichInButton ${isSignIn ? "show" : ""}`}
           onClick={handleSignInButton}
         >
-          Sign In
-        </button>
-        <button
+          <span>Sign In</span>
+        </span>
+        <span
           className={`swichUpButton ${isSignUp ? "show" : ""}`}
           onClick={handleSignUpButton}
         >
-          Sign Up
-        </button>
+          <span>Sign Up</span>
+        </span>
 
         <SignUpPage isSignUp={isSignUp} setIsLogInBox={setIsLogInBox} />
         <SignInPage isSignIn={isSignIn} setIsLogInBox={setIsLogInBox} />
