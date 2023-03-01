@@ -28,11 +28,21 @@ function App() {
     const filter = travelData.filter(
       (item) => item.name.includes(search) || item.distric.includes(search)
     );
-
     setSearchResults(filter);
 
     setSearch("");
   };
+
+  const handleCategorySearch = (category) => {
+    const categoryFilter = travelData.filter((item) =>
+      item.category.find((item) => item.name.includes(category))
+    );
+    setSearchResults(categoryFilter);
+  };
+
+  // const category = travelData.map((item) => item.category);
+  // const filter = category.map((i) => i.filter((it) => it.id == 15));
+  // console.log(filter);
 
   const [authUser, setAuthUser] = useState(null);
 
@@ -57,7 +67,18 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<SharedLayout authUser={authUser} />}>
-        <Route index element={<ItemList travelData={travelData} />} />
+        <Route
+          index
+          element={
+            <ItemList
+              travelData={searchResults}
+              search={search}
+              setSearch={setSearch}
+              handleSearch={handleSearch}
+              handleCategorySearch={handleCategorySearch}
+            />
+          }
+        />
         <Route
           path="attraction/:itemid"
           element={<SingleItem travelData={travelData} />}

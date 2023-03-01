@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-const Item = ({ item }) => {
+const Item = ({ item, handleCategorySearch }) => {
   const randomIndex = Math.floor(Math.random() * item.images.length);
 
   return (
@@ -30,7 +30,11 @@ const Item = ({ item }) => {
         </p>
         <div className="category-container">
           {item.category.map((category, index) => (
-            <span className="item-category nowrap" key={index}>
+            <span
+              className="item-category nowrap"
+              key={index}
+              onClick={() => handleCategorySearch(category.name)}
+            >
               {category.name}
             </span>
           ))}

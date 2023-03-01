@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import Item from "./Item";
 import ReactPaginate from "react-paginate";
+import SearchItem from "./SearchItem";
 
-const ItemList = ({ travelData }) => {
+const ItemList = ({
+  travelData,
+  search,
+  setSearch,
+  handleSearch,
+  handleCategorySearch,
+}) => {
   const itemsPerPage = 15;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
@@ -17,9 +24,18 @@ const ItemList = ({ travelData }) => {
 
   return (
     <>
+      <SearchItem
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+      />
       <div className="travelItem-container">
         {currentItems.map((item) => (
-          <Item key={item.id} item={item} />
+          <Item
+            key={item.id}
+            item={item}
+            handleCategorySearch={handleCategorySearch}
+          />
         ))}
       </div>
       <ReactPaginate
