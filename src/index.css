@@ -1,9 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
+
 /* RESET */
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  font-family: "Ubuntu", sans-serif;
 }
 
 a:any-link {
@@ -16,6 +22,10 @@ a:any-link {
 .offscreen {
   position: absolute;
   left: -10000px;
+}
+
+.nowrap {
+  white-space: nowrap;
 }
 
 :root {
@@ -48,6 +58,13 @@ main {
   background-color: #fff;
   box-shadow: var(--BOX-SHADOW);
   border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.item:hover {
+  transform: translateY(-10px);
+  transition: 0.5s;
 }
 
 .item > img {
@@ -56,6 +73,43 @@ main {
   object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+
+.item-content {
+  padding: 10px;
+}
+
+.item-distric {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  margin-top: 10px;
+  color: #7985e8;
+}
+
+.item-introduction {
+  margin-top: 10px;
+  color: gray;
+}
+
+.item-introduction span:hover {
+  opacity: 0.7;
+}
+
+.category-container {
+  margin-top: 10px;
+}
+
+.item-category {
+  background-color: #79a1e8;
+  margin-right: 10px;
+  border-radius: 30px;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
 }
 
 .searchForm {
