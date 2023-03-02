@@ -22,6 +22,7 @@ const Item = ({ item, handleCategorySearch }) => {
           {<FaMapMarkerAlt />}
           {item.distric}
         </p>
+
         <p className="item-introduction">
           {item.introduction.slice(0, 10)}...
           <span>

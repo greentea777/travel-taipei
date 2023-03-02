@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { RiUser5Line, RiUser5Fill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 const Header = ({ handleLogInBox, authUser }) => {
   const [isButtonOn, setIsbuttonOn] = useState(false);
@@ -21,7 +22,9 @@ const Header = ({ handleLogInBox, authUser }) => {
   return (
     <header className="header">
       <div className="header-title">
-        <span className="logo">Logo</span>
+        <Link to="/">
+          <span className="logo">Logo</span>
+        </Link>
 
         <div className="header-title-right">
           {authUser ? (
@@ -51,7 +54,9 @@ const Header = ({ handleLogInBox, authUser }) => {
       <nav className={isButtonOn ? "expended" : ""}>
         <ul>
           <li>
-            <a href="">Favourite</a>
+            <Link to="favourite" onClick={hadleMenu}>
+              Favourite
+            </Link>
           </li>
         </ul>
       </nav>

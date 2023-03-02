@@ -7,6 +7,9 @@ import SharedLayout from "./components/SharedLayout";
 import LogPage from "./components/LogPage";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./config/firebase";
+import Favourite from "./components/Favourite";
+import { database } from "./config/firebase";
+import { getDocs, collection, addDoc } from "firebase/firestore";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -64,6 +67,24 @@ function App() {
     };
   }, []);
 
+  const [commentList, setCommentList] = useState([]);
+  const [rerender, setRerender] = useState(false);
+
+  const commentCollectionRef = collection(database, "comments");
+
+  useEffect(() => {
+    const getComment = async () => {
+      const data = await getDocs(commentCollectionRef);
+      const filterData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setCommentList(filterData);
+    };
+
+    getComment();
+  }, [rerender]);
+
   return (
     <Routes>
       <Route path="/" element={<SharedLayout authUser={authUser} />}>
@@ -81,9 +102,16 @@ function App() {
         />
         <Route
           path="attraction/:itemid"
-          element={<SingleItem travelData={travelData} />}
+          element={
+            <SingleItem
+              travelData={travelData}
+              commentList={commentList}
+              setRerender={setRerender}
+            />
+          }
         />
         <Route path="login" element={<LogPage />} />
+        <Route path="favourite" element={<Favourite />} />
       </Route>
     </Routes>
   );
