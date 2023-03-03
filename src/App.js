@@ -107,6 +107,7 @@ function App() {
               travelData={travelData}
               commentList={commentList}
               setRerender={setRerender}
+              authUser={authUser}
             />
           }
         />
