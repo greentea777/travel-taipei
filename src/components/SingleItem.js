@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import {
   addDoc,
   collection,
@@ -208,7 +207,7 @@ const SingleItem = ({ travelData, commentList, setRerender, authUser }) => {
               )
           )}
 
-        {authUser && isTextareaOn && (
+        {authUser && isTextareaOn ? (
           <>
             <form className="form-container" onSubmit={createComment}>
               <textarea
@@ -220,9 +219,7 @@ const SingleItem = ({ travelData, commentList, setRerender, authUser }) => {
                 onChange={(e) => setComment(e.target.value)}
               ></textarea>
             </form>
-            <button className="cancleBtn" onClick={closeTextarea}>
-              Cancel
-            </button>
+
             {isEdit && commentList.find((a) => a.id === selectId) ? (
               <button
                 className="saveBtn"
@@ -235,16 +232,19 @@ const SingleItem = ({ travelData, commentList, setRerender, authUser }) => {
                 Submit
               </button>
             )}
+            <button className="cancleBtn" onClick={closeTextarea}>
+              Cancel
+            </button>
           </>
+        ) : (
+          <button
+            className="addBtn"
+            style={{ marginBottom: "200px" }}
+            onClick={handleTextarea}
+          >
+            Add a comment
+          </button>
         )}
-
-        <button
-          className="addBtn"
-          style={{ marginBottom: "200px" }}
-          onClick={handleTextarea}
-        >
-          Add a comment
-        </button>
       </section>
     </div>
   );

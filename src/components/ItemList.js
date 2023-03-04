@@ -9,7 +9,10 @@ const ItemList = ({
   setSearch,
   handleSearch,
   handleCategorySearch,
+  likeList,
+  setRerender,
 }) => {
+  // Pagination //
   const itemsPerPage = 15;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
@@ -35,6 +38,8 @@ const ItemList = ({
             key={item.id}
             item={item}
             handleCategorySearch={handleCategorySearch}
+            likeList={likeList}
+            setRerender={setRerender}
           />
         ))}
       </div>

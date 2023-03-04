@@ -83,6 +83,24 @@ function App() {
     };
 
     getComment();
+
+    return () => getComment();
+  }, [rerender]);
+
+  const likeCollectionRef = collection(database, "likeList");
+  const [likeList, setLikeList] = useState([]);
+  useEffect(() => {
+    const getLikeList = async () => {
+      const data = await getDocs(likeCollectionRef);
+      const filterLikeListData = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setLikeList(filterLikeListData);
+    };
+
+    getLikeList();
+    return () => getLikeList();
   }, [rerender]);
 
   return (
@@ -97,6 +115,8 @@ function App() {
               setSearch={setSearch}
               handleSearch={handleSearch}
               handleCategorySearch={handleCategorySearch}
+              likeList={likeList}
+              setRerender={setRerender}
             />
           }
         />
