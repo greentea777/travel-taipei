@@ -28,13 +28,13 @@ const ItemList = ({
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+  }, [itemOffset]);
 
   return (
-    <>
+    <main>
       <div className="travelItem-top">
         <div className="title-left">
-          <h2>Attraction List</h2>
+          <h2>Attractions List</h2>
           <h4>{`${db.total} Attractions`}</h4>
         </div>
         <SearchItem
@@ -71,7 +71,7 @@ const ItemList = ({
         breakLinkClassName="page-num"
         activeLinkClassName="active"
       />
-    </>
+    </main>
   );
 };
 

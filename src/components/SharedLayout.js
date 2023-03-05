@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
+import Footer from "./Footer";
 import Header from "./Header";
 import LogPage from "./LogPage";
 
@@ -14,9 +15,9 @@ const SharedLayout = ({ authUser }) => {
       {isLogInBox && (
         <LogPage isLogInBox={isLogInBox} setIsLogInBox={setIsLogInBox} />
       )}
-      <main>
-        <Outlet />
-      </main>
+
+      <Outlet />
+      <Footer />
     </>
   );
 };

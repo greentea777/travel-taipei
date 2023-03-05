@@ -12,16 +12,23 @@ html {
   scroll-behavior: smooth;
 }
 
+#root {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
+
 a:any-link {
   text-decoration: none;
   color: black;
 }
 
 main {
-  height: 100svh;
-  width: 100%;
-  position: absolute;
-  top: 80px;
+  /* height: 100svh; */
+  /* width: 100%; */
+  /* position: absolute; */
+  /* top: 80px; */
+  height: 100%;
 }
 
 /* || UTILITY CLASSES */
@@ -98,6 +105,7 @@ main {
   padding: 0 27px;
   max-width: 980px;
   min-width: 340px;
+  padding-top: 70px;
 }
 
 .travelItem-top h4 {
@@ -209,11 +217,12 @@ main {
 .singleItem {
   padding: 0 7%;
 
-  margin: 0 auto;
+  margin: 0 auto 60px;
 }
 
 .singleItem-title {
   font-size: clamp(1.5rem, 3vw, 3rem);
+  padding-top: 70px;
 }
 
 .singleItem-img {
@@ -345,12 +354,13 @@ main {
 }
 
 .pagination .page-num:hover {
-  background-color: aqua;
+  background-color: var(--BUTTON-BGCOLOR);
   color: white;
 }
 
 .pagination .active {
-  background-color: aqua;
+  background-color: var(--BUTTON-BGCOLOR);
+  color: #fff;
 }
 
 /* HEADER */
@@ -486,6 +496,8 @@ nav {
   transition: 0.5s;
   display: none;
   animation: unexpendedMenu 0.5s forwards;
+  position: fixed;
+  width: 100%;
 }
 
 nav.expended {
@@ -628,6 +640,7 @@ nav a:any-link {
   margin: 0 auto;
   max-width: 980px;
   min-width: 340px;
+  padding-top: 70px;
 }
 
 .favourite-header {
@@ -642,7 +655,7 @@ nav a:any-link {
   display: grid;
   gap: 20px;
   grid-template-columns: 1fr;
-  margin-top: 25px;
+  margin: 25px 0 50px;
 }
 
 @media (min-width: 576px) {
@@ -655,5 +668,17 @@ nav a:any-link {
     gap: 20px;
     grid-template-columns: repeat(auto-fit, 300px);
     margin-top: 25px;
+    justify-content: center;
   }
+}
+
+.footer {
+  background-color: var(--HEADER-COLOR);
+  color: var(--HEADER-FCOLOR);
+  height: 50px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  display: grid;
+  place-items: center;
 }

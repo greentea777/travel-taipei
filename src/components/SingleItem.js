@@ -136,121 +136,123 @@ const SingleItem = ({ travelData, commentList, setRerender, authUser }) => {
   }, []);
 
   return (
-    <div className="singleItem">
-      <section className="info-section">
-        <h1 className="singleItem-title">{singleItem.name}</h1>
-        <img
-          className="singleItem-img"
-          src={
-            singleItem.images.length < 1
-              ? "https://www.bcpva.com/wp-content/themes/consultix/images/no-image-found-360x260.png"
-              : singleItem.images[0].src
-          }
-          alt={singleItem.name}
-        />
-        <p className="singleItem-introduction">
-          {!isParagraph && singleItem.introduction.length > 200
-            ? singleItem.introduction.slice(0, 200)
-            : singleItem.introduction}
-          {!isParagraph && singleItem.introduction.length > 200 ? (
-            <span onClick={handleParagraphShow}> View More</span>
-          ) : singleItem.introduction.length < 200 ? (
-            ""
-          ) : (
-            <span onClick={handleParagraphShow}>View Less</span>
-          )}
-        </p>
-        <h2>Information</h2>
-        <h3>Category</h3>
-        <p className="tag-container">
-          {singleItem.category.map((category, index) => (
-            <span key={index} className="item-category nowrap">
-              {category.name}
-            </span>
-          ))}
-        </p>
-        <h3>Services</h3>
-        <p className="tag-container">
-          {singleItem.service.map((service, index) => (
-            <span key={index} className="item-category nowrap">
-              {service.name}
-            </span>
-          ))}
-        </p>
-        <h3>Address</h3>
-        <p>{singleItem.address}</p>
-        <h3>Friendly Reminder</h3>
-        <p>{singleItem.remind > 0 ? singleItem.remind : "none"}</p>
-      </section>
-
-      <section className="comment-section">
-        <h2>
-          {`${
-            commentList.filter((item) => item.itemId === itemid).length < 2
-              ? "Comment"
-              : "Comments"
-          }`}{" "}
-          ({commentList.filter((item) => item.itemId === itemid).length})
-        </h2>
-        {commentList
-          .sort((a, b) => a.order - b.order)
-          .map(
-            (item) =>
-              item.itemId === itemid && (
-                <Comments
-                  key={item.id}
-                  item={item}
-                  deleteComment={() => deleteComment(item.id)}
-                  editComment={editComment}
-                  authUser={authUser}
-                  saveComment={saveComment}
-                  comment={comment}
-                  isEdit={isEdit}
-                  selectId={selectId}
-                />
-              )
-          )}
-
-        {authUser && isTextareaOn ? (
-          <>
-            <form className="form-container" onSubmit={createComment}>
-              <textarea
-                ref={ref}
-                cols="30"
-                rows="10"
-                placeholder="comment..."
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              ></textarea>
-            </form>
-
-            {isEdit && commentList.find((a) => a.id === selectId) ? (
-              <button
-                className="saveBtn"
-                onClick={() => saveComment(comment, selectId)}
-              >
-                Save
-              </button>
+    <main>
+      <div className="singleItem">
+        <section className="info-section">
+          <h1 className="singleItem-title">{singleItem.name}</h1>
+          <img
+            className="singleItem-img"
+            src={
+              singleItem.images.length < 1
+                ? "https://www.bcpva.com/wp-content/themes/consultix/images/no-image-found-360x260.png"
+                : singleItem.images[0].src
+            }
+            alt={singleItem.name}
+          />
+          <p className="singleItem-introduction">
+            {!isParagraph && singleItem.introduction.length > 200
+              ? singleItem.introduction.slice(0, 200)
+              : singleItem.introduction}
+            {!isParagraph && singleItem.introduction.length > 200 ? (
+              <span onClick={handleParagraphShow}> View More</span>
+            ) : singleItem.introduction.length < 200 ? (
+              ""
             ) : (
-              <button className="submitBtn" onClick={createComment}>
-                Submit
-              </button>
+              <span onClick={handleParagraphShow}>View Less</span>
             )}
-            <button className="cancleBtn" onClick={closeTextarea}>
-              Cancel
+          </p>
+          <h2>Information</h2>
+          <h3>Category</h3>
+          <p className="tag-container">
+            {singleItem.category.map((category, index) => (
+              <span key={index} className="item-category nowrap">
+                {category.name}
+              </span>
+            ))}
+          </p>
+          <h3>Services</h3>
+          <p className="tag-container">
+            {singleItem.service.map((service, index) => (
+              <span key={index} className="item-category nowrap">
+                {service.name}
+              </span>
+            ))}
+          </p>
+          <h3>Address</h3>
+          <p>{singleItem.address}</p>
+          <h3>Friendly Reminder</h3>
+          <p>{singleItem.remind > 0 ? singleItem.remind : "none"}</p>
+        </section>
+
+        <section className="comment-section">
+          <h2>
+            {`${
+              commentList.filter((item) => item.itemId === itemid).length < 2
+                ? "Comment"
+                : "Comments"
+            }`}{" "}
+            ({commentList.filter((item) => item.itemId === itemid).length})
+          </h2>
+          {commentList
+            .sort((a, b) => a.order - b.order)
+            .map(
+              (item) =>
+                item.itemId === itemid && (
+                  <Comments
+                    key={item.id}
+                    item={item}
+                    deleteComment={() => deleteComment(item.id)}
+                    editComment={editComment}
+                    authUser={authUser}
+                    saveComment={saveComment}
+                    comment={comment}
+                    isEdit={isEdit}
+                    selectId={selectId}
+                  />
+                )
+            )}
+
+          {authUser && isTextareaOn ? (
+            <>
+              <form className="form-container" onSubmit={createComment}>
+                <textarea
+                  ref={ref}
+                  cols="30"
+                  rows="10"
+                  placeholder="comment..."
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                ></textarea>
+              </form>
+
+              {isEdit && commentList.find((a) => a.id === selectId) ? (
+                <button
+                  className="saveBtn"
+                  onClick={() => saveComment(comment, selectId)}
+                >
+                  Save
+                </button>
+              ) : (
+                <button className="submitBtn" onClick={createComment}>
+                  Submit
+                </button>
+              )}
+              <button className="cancleBtn" onClick={closeTextarea}>
+                Cancel
+              </button>
+            </>
+          ) : (
+            <button
+              className="addBtn"
+              style={{ marginBottom: "200px" }}
+              onClick={handleTextarea}
+            >
+              Add a comment
             </button>
-          </>
-        ) : (
-          <button
-            className="addBtn"
-            style={{ marginBottom: "200px" }}
-            onClick={handleTextarea}
-          >
-            Add a comment
-          </button>
-        )}
-      </section>
-    </div>
+          )}
+        </section>
+      </div>
+    </main>
   );
 };
 
