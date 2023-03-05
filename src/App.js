@@ -117,6 +117,7 @@ function App() {
               handleCategorySearch={handleCategorySearch}
               likeList={likeList}
               setRerender={setRerender}
+              db={db}
             />
           }
         />
@@ -131,8 +132,19 @@ function App() {
             />
           }
         />
-        <Route path="login" element={<LogPage />} />
-        <Route path="favourite" element={<Favourite />} />
+
+        <Route
+          path="favourite"
+          element={
+            <Favourite
+              travelData={travelData}
+              handleCategorySearch={handleCategorySearch}
+              likeList={likeList}
+              setRerender={setRerender}
+              auth={auth}
+            />
+          }
+        />
       </Route>
     </Routes>
   );

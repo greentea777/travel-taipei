@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Item from "./Item";
 import ReactPaginate from "react-paginate";
 import SearchItem from "./SearchItem";
@@ -11,6 +11,7 @@ const ItemList = ({
   handleCategorySearch,
   likeList,
   setRerender,
+  db,
 }) => {
   // Pagination //
   const itemsPerPage = 15;
@@ -25,13 +26,24 @@ const ItemList = ({
     setItemOffset(newOffset);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
-      <SearchItem
-        search={search}
-        setSearch={setSearch}
-        handleSearch={handleSearch}
-      />
+      <div className="travelItem-top">
+        <div className="title-left">
+          <h2>Attraction List</h2>
+          <h4>{`${db.total} Attractions`}</h4>
+        </div>
+        <SearchItem
+          search={search}
+          setSearch={setSearch}
+          handleSearch={handleSearch}
+        />
+      </div>
+
       <div className="travelItem-container">
         {currentItems.map((item) => (
           <Item

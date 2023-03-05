@@ -13,12 +13,14 @@ import { database, auth } from "../config/firebase";
 const Item = ({ item, handleCategorySearch, likeList, setRerender }) => {
   // const randomIndex = Math.floor(Math.random() * item.images.length);
   const [isLike, setIsLike] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const likeCollectionRef = collection(database, "likeList");
 
   // a bug needs to be solved: Preventing click events on double click
   const handleLikeBtn = async (id) => {
+    setIsButtonDisabled(true);
+    setTimeout(() => setIsButtonDisabled(false), 300);
     let nextIsLike = !isLike;
-
     if (auth.currentUser) {
       setIsLike(nextIsLike);
 
@@ -36,29 +38,32 @@ const Item = ({ item, handleCategorySearch, likeList, setRerender }) => {
         setRerender((prev) => !prev);
       } else if (isMatch[0]?.itemId === item.id) {
         const likeListData = doc(database, "likeList", id);
-        await updateDoc(likeListData, { isLike: nextIsLike });
+        await deleteDoc(likeListData);
+
+        // const likeListData = doc(database, "likeList", id);
+        // await updateDoc(likeListData, { isLike: nextIsLike });
         setRerender((prev) => !prev);
       }
     }
   };
 
-  useEffect(() => {
-    const deleteLikeList = async (id) => {
-      if (!auth.currentUser) {
-        return;
-      }
+  // useEffect(() => {
+  //   const deleteLikeList = async (id) => {
+  //     if (!auth.currentUser) {
+  //       return;
+  //     }
 
-      if (auth.currentUser.uid !== isMatch[0]?.author.userId) {
-        return;
-      }
-      const likeListData = doc(database, "likeList", id);
-      await deleteDoc(likeListData);
-      setIsLike(false);
-    };
+  //     if (auth.currentUser.uid !== isMatch[0]?.author.userId) {
+  //       return;
+  //     }
+  //     const likeListData = doc(database, "likeList", id);
+  //     await deleteDoc(likeListData);
+  //     setIsLike(false);
+  //   };
 
-    deleteLikeList(isMatch[0]?.id);
-    return () => deleteLikeList(isMatch[0]?.id);
-  }, [isLike]);
+  //   deleteLikeList(isMatch[0]?.id);
+  //   return () => deleteLikeList(isMatch[0]?.id);
+  // }, [isLike]);
 
   const isMatch = likeList.filter((list) => {
     if (auth.currentUser) {
@@ -72,6 +77,7 @@ const Item = ({ item, handleCategorySearch, likeList, setRerender }) => {
     // <Link to={`/attraction/${item.id}`}>
     <div className="item">
       <img
+        className="favourite-img"
         src={
           item.images.length < 1
             ? "https://www.bcpva.com/wp-content/themes/consultix/images/no-image-found-360x260.png"
@@ -81,26 +87,13 @@ const Item = ({ item, handleCategorySearch, likeList, setRerender }) => {
       />
       <div className="item-content">
         <h3 className="item-title">{item.name}</h3>
-        {/* <span
-          style={{
-            backgroundColor:
-              auth.currentUser &&
-              isMatch[0]?.isLike &&
-              auth.currentUser.uid === isMatch[0].author.userId
-                ? "red"
-                : "green",
-          }}
-          onClick={() => handleLikeBtn(isMatch[0]?.id)}
-        >
-          <FaRegHeart />
-        </span> */}
-
         <div className="distric-likeBtn-container">
           <p className="item-distric">
             {<FaMapMarkerAlt />}
             {item.distric}
           </p>
-          <span
+          <button
+            disabled={isButtonDisabled}
             className="likeBtn"
             onClick={() => handleLikeBtn(isMatch[0]?.id)}
           >
@@ -111,7 +104,7 @@ const Item = ({ item, handleCategorySearch, likeList, setRerender }) => {
             ) : (
               <FaRegHeart />
             )}
-          </span>
+          </button>
         </div>
 
         <p className="item-introduction">

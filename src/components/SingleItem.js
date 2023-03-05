@@ -131,6 +131,10 @@ const SingleItem = ({ travelData, commentList, setRerender, authUser }) => {
     setRerender((prev) => !prev);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="singleItem">
       <section className="info-section">

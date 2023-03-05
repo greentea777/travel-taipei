@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { auth } from "../config/firebase";
 import { signOut } from "firebase/auth";
 import { RiUser5Line, RiUser5Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({ handleLogInBox, authUser }) => {
   const [isButtonOn, setIsbuttonOn] = useState(false);
+  const navigate = useNavigate();
 
   const hadleMenu = () => {
     setIsbuttonOn(!isButtonOn);
@@ -14,6 +15,7 @@ const Header = ({ handleLogInBox, authUser }) => {
   const userSignOut = async () => {
     try {
       await signOut(auth);
+      navigate("/");
     } catch (err) {
       console.log(err);
     }

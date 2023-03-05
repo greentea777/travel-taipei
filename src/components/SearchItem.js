@@ -14,7 +14,9 @@ const SearchItem = ({ search, setSearch, handleSearch }) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-      <button onClick={() => handleSearch()}>Search</button>
+      <button className="searchBtn" onClick={() => handleSearch()}>
+        Search
+      </button>
     </form>
   );
 };

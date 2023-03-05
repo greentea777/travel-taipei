@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap");
 /* RESET */
 
 * {
@@ -9,13 +8,20 @@
 }
 
 html {
-  font-family: "Ubuntu", sans-serif;
+  font-family: "Montserrat", sans-serif;
   scroll-behavior: smooth;
 }
 
 a:any-link {
   text-decoration: none;
   color: black;
+}
+
+main {
+  height: 100svh;
+  width: 100%;
+  position: absolute;
+  top: 80px;
 }
 
 /* || UTILITY CLASSES */
@@ -39,13 +45,70 @@ a:any-link {
   --INPUT-BGCOLOR: #e2e3ed;
 }
 
+/* SEARCH BAR */
+
+.searchForm {
+  display: flex;
+
+  margin: 10px 0;
+}
+
+.searchForm input {
+  width: 120px;
+  height: 30px;
+  border: 2px solid var(--BUTTON-BGCOLOR);
+  outline: none;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  padding: 0 2px;
+  transition: width 0.4s ease-in-out;
+}
+
+.searchForm input:focus {
+  border-color: blue;
+  width: 300px;
+}
+
+.searchBtn {
+  background-color: var(--BUTTON-BGCOLOR);
+  border: none;
+  color: #fff;
+  padding: 3px 5px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  cursor: pointer;
+}
+
+.searchBtn:hover {
+  background-color: rgba(121, 161, 232, 0.7);
+  color: rgba(36, 34, 34, 0.7);
+}
+
+.searchBtn:active {
+  background-color: rgba(18, 95, 228, 0.7);
+  color: rgba(36, 34, 34, 0.7);
+}
+
 /* TRAVELITEM */
 
-main {
-  height: 100svh;
-  width: 100%;
-  position: absolute;
-  top: 100px;
+.travelItem-top {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto 20px;
+  padding: 0 27px;
+  max-width: 980px;
+  min-width: 340px;
+}
+
+.travelItem-top h4 {
+  color: var(--BUTTON-BGCOLOR);
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+.title-left {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
 }
 
 .travelItem-container {
@@ -53,6 +116,9 @@ main {
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 20px;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 980px;
+  min-width: 340px;
 }
 
 .item {
@@ -129,6 +195,7 @@ main {
   cursor: pointer;
   border: 1px solid;
   border-radius: 50%;
+  background-color: #fff;
 }
 
 .item-category:hover {
@@ -259,25 +326,6 @@ main {
   transition: 0.5s;
 }
 
-@media (min-width: 576px) {
-  .singleItem {
-    width: 70%;
-  }
-}
-
-/* SEARCH BAR */
-
-.searchForm {
-  display: flex;
-  justify-content: center;
-  margin: 30px 0;
-}
-
-.searchForm input {
-  width: 300px;
-  height: 30px;
-}
-
 /* PAGINATION */
 
 .pagination {
@@ -310,7 +358,7 @@ main {
 header {
   position: fixed;
   width: 100%;
-  height: 50px;
+
   z-index: 50;
 }
 
@@ -322,7 +370,7 @@ header {
   position: relative;
   z-index: 20;
   color: var(--HEADER-FCOLOR);
-  padding: 10px 15px;
+  padding: 5px 15px;
 }
 
 .logo {
@@ -336,7 +384,7 @@ header {
 }
 
 .header-title-right p {
-  font-size: 1.3rem;
+  font-size: 1rem;
   transition: 0.8s;
 }
 
@@ -345,15 +393,15 @@ header {
   cursor: pointer;
   display: flex;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
 }
 
 .signInButton svg {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .signOutButton svg {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
 .signInButton:hover,
@@ -364,8 +412,8 @@ header {
 .nav-button {
   background-color: transparent;
   border: none;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -377,7 +425,7 @@ header {
 .nav-icon,
 .nav-icon::before,
 .nav-icon::after {
-  width: 40px;
+  width: 30px;
   height: 3px;
   background-color: var(--HEADER-FCOLOR);
   position: absolute;
@@ -386,11 +434,11 @@ header {
 }
 
 .nav-icon::before {
-  transform: translate(-20px, -12px);
+  transform: translate(-15px, -10px);
 }
 
 .nav-icon::after {
-  transform: translate(-20px, 12px);
+  transform: translate(-15px, 10px);
 }
 
 .nav-icon::before,
@@ -496,7 +544,7 @@ nav a:any-link {
 .swichUpButton {
   background-color: #fff;
   position: absolute;
-  width: 120px;
+  width: 130px;
   height: 40px;
   padding: 5px 15px;
   box-shadow: var(--BOX-SHADOW);
@@ -515,7 +563,7 @@ nav a:any-link {
 }
 
 .swichUpButton {
-  left: 120px;
+  left: 130px;
 }
 
 .logInPage form {
@@ -571,4 +619,41 @@ nav a:any-link {
 
 .SignUpPage.show {
   display: block;
+}
+
+/* FAVOURITE PAGE */
+
+.favourite-page {
+  padding: 0 20px;
+  margin: 0 auto;
+  max-width: 980px;
+  min-width: 340px;
+}
+
+.favourite-header {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.favourite-header p {
+  margin: 10px 0;
+}
+
+.favourite-item {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+  margin-top: 25px;
+}
+
+@media (min-width: 576px) {
+  .singleItem {
+    width: 70%;
+  }
+
+  .favourite-item {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, 300px);
+    margin-top: 25px;
+  }
 }
