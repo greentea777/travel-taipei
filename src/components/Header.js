@@ -4,7 +4,7 @@ import { signOut } from "firebase/auth";
 import { RiUser5Line, RiUser5Fill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 
-const Header = ({ handleLogInBox, authUser }) => {
+const Header = ({ handleLogInBox, authUser, resetSearch }) => {
   const [isButtonOn, setIsbuttonOn] = useState(false);
   const navigate = useNavigate();
 
@@ -25,7 +25,9 @@ const Header = ({ handleLogInBox, authUser }) => {
     <header className="header">
       <div className="header-title">
         <Link to="/">
-          <span className="logo">Logo</span>
+          <span onClick={() => resetSearch()} className="logo">
+            Logo
+          </span>
         </Link>
 
         <div className="header-title-right">

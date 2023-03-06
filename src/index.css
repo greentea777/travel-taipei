@@ -69,6 +69,9 @@ main {
   border-bottom-left-radius: 8px;
   padding: 0 2px;
   transition: width 0.4s ease-in-out;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .searchForm input:focus {
@@ -368,7 +371,8 @@ main {
 header {
   position: fixed;
   width: 100%;
-
+  top: 0;
+  left: 0;
   z-index: 50;
 }
 
@@ -681,4 +685,8 @@ nav a:any-link {
   bottom: 0;
   display: grid;
   place-items: center;
+}
+
+.login-notification {
+  margin-top: 70px;
 }

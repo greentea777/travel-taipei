@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 
@@ -7,7 +7,7 @@ const SignInPage = ({ isSignIn, setIsLogInBox }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const [errorMessage, setErrorMessage] = useState("");
   const signIn = async (e) => {
     e.preventDefault();
     try {
@@ -19,9 +19,15 @@ const SignInPage = ({ isSignIn, setIsLogInBox }) => {
       setIsLogInBox(false);
       navigate("/");
     } catch (err) {
-      console.log("You have not signed up yet!");
+      if (err.message === "Firebase: Error (auth/user-not-found).") {
+        setErrorMessage(err.message);
+      }
     }
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className={`SignInPage ${isSignIn ? "show" : ""}`}>

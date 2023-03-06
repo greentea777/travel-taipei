@@ -10,6 +10,8 @@ import { auth } from "./config/firebase";
 import Favourite from "./components/Favourite";
 import { database } from "./config/firebase";
 import { getDocs, collection, addDoc } from "firebase/firestore";
+import ReactPaginate from "react-paginate";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -36,11 +38,21 @@ function App() {
     setSearch("");
   };
 
+  const resetSearch = () => {
+    const filter = travelData.filter(
+      (item) => item.name.includes("") || item.distric.includes("")
+    );
+    setSearchResults(filter);
+
+    setSearch("");
+  };
+
   const handleCategorySearch = (category) => {
     const categoryFilter = travelData.filter((item) =>
       item.category.find((item) => item.name.includes(category))
     );
     setSearchResults(categoryFilter);
+    window.scrollTo(0, 0);
   };
 
   // const category = travelData.map((item) => item.category);
@@ -65,7 +77,7 @@ function App() {
     return () => {
       checkUser();
     };
-  }, []);
+  }, [search]);
 
   const [commentList, setCommentList] = useState([]);
   const [rerender, setRerender] = useState(false);
@@ -105,7 +117,10 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<SharedLayout authUser={authUser} />}>
+      <Route
+        path="/"
+        element={<SharedLayout authUser={authUser} resetSearch={resetSearch} />}
+      >
         <Route
           index
           element={
@@ -121,6 +136,7 @@ function App() {
             />
           }
         />
+
         <Route
           path="attraction/:itemid"
           element={
@@ -136,13 +152,15 @@ function App() {
         <Route
           path="favourite"
           element={
-            <Favourite
-              travelData={travelData}
-              handleCategorySearch={handleCategorySearch}
-              likeList={likeList}
-              setRerender={setRerender}
-              auth={auth}
-            />
+            <ProtectedRoute authUser={authUser}>
+              <Favourite
+                travelData={travelData}
+                handleCategorySearch={handleCategorySearch}
+                likeList={likeList}
+                setRerender={setRerender}
+                auth={auth}
+              />
+            </ProtectedRoute>
           }
         />
       </Route>

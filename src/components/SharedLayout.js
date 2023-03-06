@@ -4,14 +4,18 @@ import Footer from "./Footer";
 import Header from "./Header";
 import LogPage from "./LogPage";
 
-const SharedLayout = ({ authUser }) => {
+const SharedLayout = ({ authUser, resetSearch }) => {
   const [isLogInBox, setIsLogInBox] = useState(false);
   const handleLogInBox = () => {
     setIsLogInBox(!isLogInBox);
   };
   return (
     <>
-      <Header handleLogInBox={handleLogInBox} authUser={authUser} />
+      <Header
+        handleLogInBox={handleLogInBox}
+        authUser={authUser}
+        resetSearch={resetSearch}
+      />
       {isLogInBox && (
         <LogPage isLogInBox={isLogInBox} setIsLogInBox={setIsLogInBox} />
       )}

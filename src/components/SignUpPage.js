@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../config/firebase";
 
@@ -26,6 +26,9 @@ const SignUpPage = ({ isSignUp, setIsLogInBox }) => {
       console.log(err);
     }
   };
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className={`SignUpPage ${isSignUp ? "show" : ""}`}>

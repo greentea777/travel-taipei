@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Item from "./Item";
 import ReactPaginate from "react-paginate";
 import SearchItem from "./SearchItem";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ItemList = ({
   travelData,
@@ -26,9 +27,9 @@ const ItemList = ({
     setItemOffset(newOffset);
   };
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [itemOffset]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [itemOffset]);
 
   return (
     <main>
@@ -70,6 +71,10 @@ const ItemList = ({
         nextLinkClassName="page-num"
         breakLinkClassName="page-num"
         activeLinkClassName="active"
+        hrefBuilder={(page, pageCount, selected) =>
+          page >= 1 && page <= pageCount ? `/${page}` : "#"
+        }
+        hrefAllControls
       />
     </main>
   );
