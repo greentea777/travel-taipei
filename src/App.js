@@ -12,6 +12,7 @@ import { database } from "./config/firebase";
 import { getDocs, collection, addDoc } from "firebase/firestore";
 import ReactPaginate from "react-paginate";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Page from "./components/Page";
 
 function App() {
   const [travelData, setTravelData] = useState(db.data);
@@ -136,6 +137,26 @@ function App() {
             />
           }
         />
+
+        {/* <Route index element={<Home />} /> */}
+        {/* 
+        <Route
+          index
+          element={
+            <Page
+              searchResults={searchResults}
+              travelData={searchResults}
+              search={search}
+              setSearch={setSearch}
+              handleSearch={handleSearch}
+              handleCategorySearch={handleCategorySearch}
+              likeList={likeList}
+              setRerender={setRerender}
+              db={db}
+              rerender={rerender}
+            />
+          }
+        /> */}
 
         <Route
           path="attraction/:itemid"

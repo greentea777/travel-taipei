@@ -8,6 +8,7 @@ const SignInPage = ({ isSignIn, setIsLogInBox }) => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
+
   const signIn = async (e) => {
     e.preventDefault();
     try {

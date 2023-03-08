@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Item from "./Item";
-import ReactPaginate from "react-paginate";
-import SearchItem from "./SearchItem";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import ReactPaginate from "react-paginate";
+import ItemList from "./ItemList";
 
-const ItemList = ({
+import Item from "./Item";
+
+const Page = ({
   travelData,
   search,
   setSearch,
@@ -13,8 +14,8 @@ const ItemList = ({
   likeList,
   setRerender,
   db,
+  searchResults,
 }) => {
-  // Pagination //
   const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
   let num = searchParams.get("page");
 
@@ -44,30 +45,17 @@ const ItemList = ({
   }, [searchParams]);
 
   return (
-    <main>
-      <div className="travelItem-top">
-        <div className="title-left">
-          <h2>Attractions List</h2>
-          <h4>{`${db.total} Attractions`}</h4>
-        </div>
-        <SearchItem
-          search={search}
-          setSearch={setSearch}
-          handleSearch={handleSearch}
+    <>
+      {currentItems.map((item) => (
+        <Item
+          key={item.id}
+          item={item}
+          handleCategorySearch={handleCategorySearch}
+          likeList={likeList}
+          setRerender={setRerender}
         />
-      </div>
+      ))}
 
-      <div className="travelItem-container">
-        {currentItems.map((item) => (
-          <Item
-            key={item.id}
-            item={item}
-            handleCategorySearch={handleCategorySearch}
-            likeList={likeList}
-            setRerender={setRerender}
-          />
-        ))}
-      </div>
       <ReactPaginate
         breakLabel="..."
         nextLabel=" >"
@@ -83,14 +71,27 @@ const ItemList = ({
         nextLinkClassName="page-num"
         breakLinkClassName="page-num"
         activeLinkClassName="active"
-        hrefBuilder={(page, pageCount, selected) =>
-          page >= 1 && page <= pageCount ? `/page/${page}` : "#"
-        }
+        hrefBuilder={(page, pageCount, selected) => {
+          return page >= 1 && page <= pageCount ? `/page/${page}` : "#";
+        }}
         hrefAllControls
         forcePage={Number(num) - 1}
       />
-    </main>
+
+      {/* style={{ margin: "80px" }}><h1>{page}</h1>{" "} */}
+      {/* <ItemList
+        travelData={searchResults}
+        search={search}
+        setSearch={setSearch}
+        handleSearch={handleSearch}
+        handleCategorySearch={handleCategorySearch}
+        likeList={likeList}
+        setRerender={setRerender}
+        db={db}
+        page={page}
+      /> */}
+    </>
   );
 };
 
-export default ItemList;
+export default Page;
